@@ -36,5 +36,6 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('profile/edit', 'Admin\ProfileController@update');
     Route::get('profile/create', 'Admin\ProfileController@add');
     Route::post('profile/create', 'Admin\ProfileController@create');
+    Route::get('news', 'Admin\NewsController@index');
   });
 });

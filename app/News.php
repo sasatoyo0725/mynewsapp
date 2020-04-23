@@ -9,7 +9,7 @@ class News extends Model
   protected $guarded = array('id');
 
   public static $rules = array(
-    'title' => 'required'|unique:posts|max:255,
-    'body' => 'required'|unique:posts,
+    'title' => 'required|max:255',
+    'body' => 'required|max:255',
   );
 }

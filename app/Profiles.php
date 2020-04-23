@@ -9,8 +9,8 @@ class Profiles extends Model
   protected $guarded = array('id');
 
     public static $rules = array(
-        'name' => 'required'|unique:posts,
-        'hobby' => 'required',
-        'introduction' => 'required'|max:255,
+        'name' => 'required|unique:posts',
+        'hobby' => 'required|max:255',
+        'introduction' => 'required|max:255',
     );
 }
