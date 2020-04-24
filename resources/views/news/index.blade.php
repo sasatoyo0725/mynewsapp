@@ -1,4 +1,5 @@
 @extends('layouts.front')
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -37,10 +38,10 @@
                                     {{ $post->updated_at->format('Y年m月d日') }}
                                 </div>
                                 <div class="title">
-                                    {{ str_limit($post->title, 150) }}
+                                    {{ substr($post->title, 0, 150) }}
                                 </div>
                                 <div class="body mt-3">
-                                    {{ str_limit($post->body, 1500) }}
+                                    {{ substr($post->body, 0, 1500) }}
                                 </div>
                             </div>
                             <div class="image col-md-6 text-right mt-4">
