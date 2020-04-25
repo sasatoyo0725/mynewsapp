@@ -13,7 +13,7 @@ body {
 }
 
 .headline .caption .image img {
-  width: 100%;
+  width: 50%;
 }
 
 .headline .caption .title {
@@ -48,6 +48,6 @@ body {
 }
 
 .posts .post .image img {
-  width: 250px;
+  width: 100px;
 }
 
