@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use App\Profiles;
 
@@ -49,15 +51,30 @@ class ProfileController extends Controller
   public function update(Request $request)
   {
     $this->validate($request, Profiles::$rules);
+    $profiles = Profiles::find($request->input('id'));
+    $profiles_form = $request->all();
+    if ($request->input('remove')) {
+      $profiles_form['image_path'] = null;
+    } elseif ($request->file('image')) {
+      $path = $request->file('image')->store('public/image');
+      $profiles_form['image_path'] = basename($path);
+    } else {
+      $profiles_form['image_path'] = $profiles->image_path;
+    }
 
-     $profiles = Profiles::find($request->id);
+    unset($profiles_form['_token']);
+    unset($profiles_form['image']);
+    unset($profiles_form['remove']);
 
-     $profiles_form = $request->all();
-     unset($profiles_form['_token']);
-
-     
-     $profiles->fill($profiles_form)->save();
-
-    return redirect('admin/profile/edit');
+    $profiles->fill($profiles_form)->save();
+    return redirect('admin/profile/show');
   }
+
+  public function show(Request $request)
+  {
+    $user = Auth::user();
+
+     return view('admin.profile.show', ['user' => $user]);
+  }
+
 }
