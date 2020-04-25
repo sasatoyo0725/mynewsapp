@@ -2,6 +2,10 @@ body {
   color: #000;
 }
 
+.navbar {
+  background-color: lightblue;
+}
+
 .header .logo {
   width: 120px;
   height: 82px;
