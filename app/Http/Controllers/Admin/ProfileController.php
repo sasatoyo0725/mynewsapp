@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use App\Profiles;
+use Storage;
 
 class ProfileController extends Controller
 {
@@ -24,8 +25,8 @@ class ProfileController extends Controller
     $form = $request->all();
 
     if (isset($form['image'])) {
-      $path = $request->file('image')->store('public/image');
-      $profiles->image_path = basename($path);
+      $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+      $profiles->image_path = Storage::disk('s3')->url($path);
     } else {
       $profiles->image_path = null;
     }
@@ -56,8 +57,8 @@ class ProfileController extends Controller
     if ($request->input('remove')) {
       $profiles_form['image_path'] = null;
     } elseif ($request->file('image')) {
-      $path = $request->file('image')->store('public/image');
-      $profiles_form['image_path'] = basename($path);
+      $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+      $profiles->image_path = Storage::disk('s3')->url($path);
     } else {
       $profiles_form['image_path'] = $profiles->image_path;
     }
