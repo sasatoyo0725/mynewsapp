@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@extends('layouts.front')
 @section('title', 'プロフィール情報')
 
 @section('content')
